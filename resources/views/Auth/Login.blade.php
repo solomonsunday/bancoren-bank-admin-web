@@ -66,8 +66,8 @@
     <script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset('assets/js/scripts.js')}}"></script>
-     <script src="{{mix('/assets/pages/utility.js')}}"></script>
-     <script src="{{mix('/assets/pages/login.js')}}"></script>		
+     <script src="{{asset('assets/pages/utility.js')}}"></script>
+     <script src="{{asset('assets/pages/login.js')}}"></script>		
 		
     </body>
 </html>

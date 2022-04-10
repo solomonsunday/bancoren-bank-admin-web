@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\DB;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,16 @@ Route::group(['middleware'=> 'guest'], function(){
 
     Route::get('/', 'Auth\LoginController@loginForm')->name('login');
     Route::post("/login", 'Auth\LoginController@login')->name('signin');
+
+    Route::get('/register', function(){
+        $create = DB::table('users')->insert([
+            'email'=> 'test@gmail.com',
+            'password'=> bcrypt('12345'),
+            'name'=> 'test'
+        ]);
+
+        return $create;
+    });
 
 });
 

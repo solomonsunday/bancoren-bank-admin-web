@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class LoginController extends Controller
 {
@@ -26,6 +27,7 @@ class LoginController extends Controller
 
     public function login(Request $request)
     {
+       
         $validator = Validator::make($request->all(), [
             'email'=> 'required|email',
             'password'=> 'required'
@@ -38,7 +40,7 @@ class LoginController extends Controller
       
 
         if (Auth::attempt(['email' => $request->get('email'), 'password' => $request->get('password')])) {
-        
+           
            $user = User::where('email', $request->get('email'))->first();
 
           
@@ -59,6 +61,16 @@ class LoginController extends Controller
         }else{
             return $this->sendBadRequestResponse('Invalid credentials');
         }
+    }
+
+    public function register()
+    {
+        $create = DB::table('users')->insert([
+            'email'=> 'test@gmail.com',
+            'password'=> bcrypt('12345')
+        ]);
+
+        return $create;
     }
 
     

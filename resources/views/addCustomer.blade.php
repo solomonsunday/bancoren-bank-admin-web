@@ -51,7 +51,7 @@
                                             <div class="col-md-6 col-lg-6 col-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Other name</label>
-                                                    <input type="text" class="form-control" id="other_name" placeholder="Enter other name" required>
+                                                    <input type="text" class="form-control" id="other_name" placeholder="Enter other name">
                                                 </div>
 
                                             </div>
@@ -59,7 +59,7 @@
                                              <div class="col-md-6 col-lg-6 col-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Maiden Name</label>
-                                                    <input type="text" class="form-control" id="maiden_name" placeholder="Enter amdien name" required>
+                                                    <input type="text" class="form-control" id="maiden_name" placeholder="Enter amdien name">
                                                 </div>
 
                                             </div>

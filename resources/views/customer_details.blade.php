@@ -19,7 +19,7 @@
                       <div class="card card-static-2 mb-30">
                         <div class="card-body-table">
                             <div class="shop-content-left pd-20" style="width:200px;">
-                                 <img src="{{env('customer_endpoint').'/'.$customer->image}}" alt="" style="width:100px;">
+                                 <img src="{{env('customer_endpoint').'/'.$customer->image_path}}" alt="" style="width:100px;">
                                 {{-- <div class="shop_img" style="">
                                    
                                 </div> --}}
@@ -45,7 +45,7 @@
                                         </div> --}}
                                         <div class="shopowner-dt-list">
                                             <span class="left-dt">Phone</span>
-                                            <span class="right-dt">{{$customer->phone}}</span>
+                                            <span class="right-dt">{{$customer->contact}}</span>
                                         </div>
                                         <div class="shopowner-dt-list">
                                             <span class="left-dt">Email</span>

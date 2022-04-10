@@ -64,8 +64,7 @@ class StaffController extends Controller
         DB::beginTransaction();
 
         try {
-
-            $create = $this->user->create([
+            $data = [
                 'first_name' => $request->get('first_name'),
                 'last_name' => $request->get('last_name'),
                 'email' => $request->get('email'),
@@ -73,16 +72,21 @@ class StaffController extends Controller
                 'password' => bcrypt(12345),
                 'access_type' => $request->get('privilege'),
                 'uuid' => rand(1000, 9999),
-            ]);
+            ];
+
+
+            $create = $this->user->create($data);
 
             $this->user->createStaff([
+                'uuid' => rand(1000, 9999),
                 'user_id'=> $create,
-                'fname'=> $request->get('first_name'),
-                'lname'=> $request->get('last_name'),
-                'email'=> $request->get('email'),
-                'phone_no'=> $request->get('phone'),
+                'first_name'=> $request->get('first_name'),
+                'last_name'=> $request->get('last_name'),
+                // 'email'=> $request->get('email'),
+                'phone'=> $request->get('phone'),
                 'address'=> $request->get('address'),
-                'created_at'=> $this->current_date
+                'created_at'=> $this->current_date,
+                'access_type' => $request->get('privilege'),
 
             ]);
 
@@ -112,7 +116,7 @@ class StaffController extends Controller
                                 'users.first_name',
                                 'users.last_name',
                                 'users.email',
-                                'users.phone',
+                                'staffs.phone as phone',
                                 'users.status',
                                 'users.access_type',
                                 'staffs.address'

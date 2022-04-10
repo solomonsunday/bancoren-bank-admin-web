@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -20,6 +21,7 @@ class UserController extends Controller
 
     public function profile()
     {
+        
         return view('profile');
     }
 
@@ -41,7 +43,10 @@ class UserController extends Controller
             'first_name'=> $request->get('first_name'),
             'last_name'=> $request->get('last_name'),
             'email'=> $request->get('email'),
-            'phone'=> $request->get('phone')
+        ]);
+
+        DB::table('customer_details')->where('id', $id)->update([
+            'contact'=> $request->get('phone')
         ]);
 
         if($update == 0){

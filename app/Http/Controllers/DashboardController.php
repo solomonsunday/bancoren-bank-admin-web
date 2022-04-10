@@ -31,7 +31,7 @@ class DashboardController extends Controller
                                 'users.first_name',
                                 'users.last_name',
                                 'users.email',
-                                'users.phone',
+                                'staffs.phone as phone',
                                 'users.status',
                                 'users.access_type',
                                 'staffs.address'
@@ -50,7 +50,7 @@ class DashboardController extends Controller
                                 'users.first_name',
                                 'users.last_name',
                                 'users.email',
-                                'users.phone',
+                                'customer_details.contact as phone',
                                 'users.status',
                                 'customer_details.address',
                                 'customer_details.account_number',

@@ -21,9 +21,16 @@
 <body class="sb-nav-fixed">
     
      <nav class="sb-topnav navbar navbar-expand navbar-light bg-clr">
-            <a class="navbar-brand logo-brand" href="index.html">Covmetrocu</a>
-			<button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
-            <a href="" class="frnt-link"><i class="fas fa-external-link-alt"></i>Home</a>
+            @if (Auth::user()->access_type == 1)
+                <a class="navbar-brand logo-brand" href="{{route('admin.home')}}">Covmetrocu</a>
+                <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+                <a href="{{route('admin.home')}}" class="frnt-link"><i class="fas fa-external-link-alt"></i>Home</a>
+            @else
+            <a class="navbar-brand logo-brand" href="{{route('staff.home')}}">Covmetrocu</a>
+            <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
+            <a href="{{route('staff.home')}}" class="frnt-link"><i class="fas fa-external-link-alt"></i>Home</a>
+            @endif
+            
             <ul class="navbar-nav ml-auto mr-md-0">
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
@@ -79,7 +86,7 @@
                                     </nav>
                                 </div>
 
-                                <a class="nav-link active" href="{{route('all.request')}}">
+                                <a class="nav-link" href="{{route('all.request')}}">
 								    <div class="sb-nav-link-icon"><i class="fas fa-layer-group"></i></div>
                                      Requests
                                 </a>
@@ -157,12 +164,9 @@
     <script src="{{asset('assets/js/jquery-3.4.1.min.js')}}"></script>
     <script src="{{asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
     <script src="{{asset("assets/sweetalert2/sweetalert2.min.js")}}"></script>
-    {{-- <script src="{{asset('assets/vendor/chart/highcharts.js')}}"></script>
-    <script src="{{asset('assets/vendor/chart/exporting.js')}}"></script>
-    <script src="{{asset('assets/vendor/chart/export-data.js')}}"></script>
-    <script src="{{asset('assets/vendor/chart/accessibility.js')}}"></script> --}}
+  
     <script src="{{asset('assets/js/scripts.js')}}"></script>
-    <script src="{{mix('/assets/pages/utility.js')}}"></script>
+    <script src="{{asset('assets/pages/utility.js')}}"></script>
 
     @yield('scripts')
     {{-- <script src="{{asset('assets/js/chart.js')}}"></script> --}}

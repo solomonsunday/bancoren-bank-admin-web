@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
 
 class PaymentController extends Controller
 {
@@ -66,7 +67,8 @@ class PaymentController extends Controller
                 'ac_number' => $request->get('account_number'),
                 'depositor_name' => $request->get('name'),
                 'amount' => $request->get('amount'),
-                'billType' => $request->get('bill_type')
+                'billType' => $request->get('bill_type'),
+                'created_at'=> Carbon::now()
             ]);
 
             $this->deductBalance($request->get('amount'), $check_ac->account_balance, $get_user->id);

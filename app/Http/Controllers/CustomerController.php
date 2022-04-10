@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -20,8 +21,8 @@ class CustomerController extends Controller
 
     public function index()
     {
-        $account_types = DB::table('account_types')->where('status', 1)->select('id', 'name')->get();
-        $verification_id = DB::table('verification_ids')->where('status', 1)->select('id', 'id_name')->get();
+        $account_types = DB::table('account_types')->select('id', 'name')->get();
+        $verification_id = DB::table('verification_ids')->select('id', 'id_name')->get();
         return view('addCustomer', [
             'account_types'=> $account_types,
             'verfication_id'=>  $verification_id
@@ -54,6 +55,7 @@ class CustomerController extends Controller
         ]);
 
         if($validator->fails()){
+           
             return $this->sendBadRequestResponse($validator->errors()->first());
         }
 
@@ -85,12 +87,14 @@ class CustomerController extends Controller
                 'alt_contact' => $request->get('alt_contact') ?? '',
                 'personal_id' => $request->get('personal_id'),
                 'valid_date' => Carbon::parse($request->get('valid_date')),
-                'gender' => $request->get('gender')
+                'gender' => $request->get('gender'),
+                'location'=> $request->get('address')
             ]);
 
             DB::commit();
 
         } catch (\Exception $ex) {
+            //dd($ex->getMessage());
             DB::rollBack();
             return $this->sendBadRequestResponse('Invalid request');
         }
@@ -109,7 +113,7 @@ class CustomerController extends Controller
                             'users.first_name',
                             'users.last_name',
                             'users.email',
-                            'users.phone',
+                            'customer_details.contact as phone',
                             'users.status',
                             'customer_details.address',
                             'customer_details.account_number',
@@ -165,16 +169,17 @@ class CustomerController extends Controller
 
     public function customer_details($id)
     {
+       
         $customer = DB::table('users')
                             ->join('customer_details', 'users.id', '=', 'customer_details.user_id')
                             ->join('account_types', 'customer_details.account_type', '=', 'account_types.id')
                             ->where('users.id', $id)
                             ->select('users.*', 'customer_details.*', 'account_types.name')
                             ->first();
-       // dd($customer);
+       //dd($customer);
 
-        $account_types = DB::table('account_types')->where('status', 1)->select('id', 'name')->get();
-        $verification_id = DB::table('verification_ids')->where('status', 1)->select('id', 'id_name')->get();
+        $account_types = DB::table('account_types')->select('id', 'name')->get();
+        $verification_id = DB::table('verification_ids')->select('id', 'id_name')->get();
 
         return view('customer_details', [
             'customer'=> $customer,
