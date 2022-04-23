@@ -64,10 +64,12 @@ class PaymentController extends Controller
             DB::table('billings')->insert([
                 'user_id' => Auth::user()->id,
                 'email' => $request->get('email'),
+                'ac_name'=> $get_user->first_name. " ". $get_user->last_name,
                 'ac_number' => $request->get('account_number'),
                 'depositor_name' => $request->get('name'),
                 'amount' => $request->get('amount'),
                 'billType' => $request->get('bill_type'),
+                'phone_number'=>$get_user->phone,
                 'created_at'=> Carbon::now()
             ]);
 
@@ -89,16 +91,16 @@ class PaymentController extends Controller
     }
 
    
-        private function deductBalance($amount, $prev_amount, $id)
-        {
-            $newbalance = $prev_amount - $amount;
-            
-            DB::table('customer_details')->where('user_id', $id)->update([
-                'account_balance'=> $newbalance
-            ]);
+    private function deductBalance($amount, $prev_amount, $id)
+    {
+        $newbalance = $prev_amount - $amount;
+        
+        DB::table('customer_details')->where('user_id', $id)->update([
+            'account_balance'=> $newbalance
+        ]);
 
-            return true;
-        }
+        return true;
+    }
 
    
 }

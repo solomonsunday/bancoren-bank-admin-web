@@ -59,13 +59,13 @@
                                                 </div>
                                             </div>
 
-                                             <div class="col-md-6 col-lg-6 col-12">
+                                             {{-- <div class="col-md-6 col-lg-6 col-12">
                                                 <div class="form-group">
                                                     <label class="form-label">Depositor Account Number*</label>
                                                     <input type="text" class="form-control" id="sender_account_number" placeholder="Enter account number of depositor">
                                                 </div>
 
-                                            </div>
+                                            </div> --}}
 
                                             <div class="col-md-6 col-lg-6 col-12">
                                                 <div class="form-group">
